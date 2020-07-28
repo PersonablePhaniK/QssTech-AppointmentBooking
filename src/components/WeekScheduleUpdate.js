@@ -3,12 +3,13 @@ import TimeInput from "./TimeInput";
 import ToggleTest from "./ToggleTest";
 // import './WeekSchedule.css';
 
-const WeekSchedule = ({
+const WeekScheduleUpdate = ({
   week,
   setFacility,
   facility,
   applyToAll,
   applyData,
+  inputForm,
 }) => {
   const [data, setData] = useState({
     weekName: week,
@@ -18,6 +19,7 @@ const WeekSchedule = ({
     scheduleTo: "06:30",
     ampmTo: "pm",
   });
+  const [hi, setHi] = useState("");
 
   const checkInp = (e) => {
     setData({
@@ -66,6 +68,26 @@ const WeekSchedule = ({
       // console.log('I data: ', week)
     }
   }, [applyData]);
+
+  useEffect(() => {
+    // inputForm
+    // console.log("Schedule Data: ", inputForm);
+    const setSchedule = () => {
+      inputForm.facilityTimings.map((i) => {
+        if (i.weekName == week) {
+          // console.log("I - 1: ", i);
+
+          setTimeout(() => {
+            setData({ ...i });
+
+            // console.log("I - 2: ", i);
+          }, 3000);
+        }
+      });
+    };
+
+    setSchedule();
+  }, []);
 
   return (
     <div
@@ -128,4 +150,4 @@ const WeekSchedule = ({
   );
 };
 
-export default React.memo(WeekSchedule);
+export default React.memo(WeekScheduleUpdate);

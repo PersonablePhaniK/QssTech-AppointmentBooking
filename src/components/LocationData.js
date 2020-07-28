@@ -31,7 +31,7 @@ const LocationData = (props) => {
 
       return x - y;
     });
-    console.log("Sorted Obj: ", obj);
+    // console.log("Sorted Obj: ", obj);
 
     setPosts(obj);
   };
@@ -50,7 +50,7 @@ const LocationData = (props) => {
   useEffect(() => {
     const getData = async () => {
       let allData = await props.db.data.toArray();
-      console.log("Check the length", allData);
+      // console.log("Check the length", allData);
 
       if (!allData.length) {
         props.history.push("/");

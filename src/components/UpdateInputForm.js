@@ -12,7 +12,7 @@ import Modal from "react-modal";
 
 // import _ from "lodash";
 import "./ModalSchedule.css";
-import WeekSchedule from "./WeekSchedule";
+import WeekScheduleUpdate from "./WeekScheduleUpdate";
 
 const customStyles = {
   content: {
@@ -127,7 +127,7 @@ const InputForm = (props) => {
       }
     }
 
-    console.log("Chkd Arry: ", chkdAry);
+    // console.log("Chkd Arry: ", chkdAry);
 
     return chkdAry;
   };
@@ -135,7 +135,7 @@ const InputForm = (props) => {
   const handleSubmitModal = (e) => {
     e.preventDefault();
     let data = preProcess();
-    console.log("Data return: ", data);
+    // console.log("Data return: ", data);
     /**
      * Check the error here
      */
@@ -157,7 +157,7 @@ const InputForm = (props) => {
 
     let applyObj = chkdAry.find((i) => i.weekName == id);
 
-    console.log("Apply Obj: ", applyObj);
+    // console.log("Apply Obj: ", applyObj);
 
     let replaceAry = [applyObj];
 
@@ -240,7 +240,7 @@ const InputForm = (props) => {
       props.db.data.put(dataObj).then(async () => {
         let allObjs = await props.db.data.toArray();
 
-        console.log("DB data: ", allObjs);
+        // console.log("DB data: ", allObjs);
       });
 
       setInputForm({
@@ -257,8 +257,9 @@ const InputForm = (props) => {
         facilityTimings: "",
       });
 
-      console.log("Final Data: ", inputForm);
+      // console.log("Final Data: ", inputForm);
       props.db.tempData.delete(inputForm.id);
+
       props.history.push("/data");
       // props.history.push("/data");
     }
@@ -279,7 +280,7 @@ const InputForm = (props) => {
   useEffect(() => {
     const getData = async () => {
       let allData = await props.db.tempData.toArray();
-      console.log("Check the length", allData);
+      // console.log("Check the length", allData);
 
       if (!allData.length) {
         props.history.push("/data");
@@ -300,6 +301,7 @@ const InputForm = (props) => {
           facilityTimings: d.facilityTimings,
         });
       });
+      props.db.tempData.delete(inputForm.id);
     };
     getData();
   }, []);
@@ -477,13 +479,14 @@ const InputForm = (props) => {
                 <div className="ml-5"></div>
               </div>
               {weeks.map((week) => (
-                <WeekSchedule
+                <WeekScheduleUpdate
                   week={week}
                   key={week}
                   setFacility={setFacility}
                   facility={facility}
                   applyToAll={applyToAll}
                   applyData={applyData}
+                  inputForm={inputForm}
                 />
               ))}
 
@@ -555,6 +558,7 @@ const InputForm = (props) => {
             }}
             className="ml-auto mr-3"
             onClick={() => {
+              props.db.tempData.delete(inputForm.id);
               props.history.push("/data");
             }}
           >

@@ -6,8 +6,8 @@ import _ from "lodash";
 import "./ModalSchedule.css";
 import WeekSchedule from "./WeekSchedule";
 import { dataService } from "./dataService";
-import { connect } from 'react-redux';
-import { fetchData} from '../actions/dataActions'
+import { connect } from "react-redux";
+import { fetchData } from "../actions/dataActions";
 
 const customStyles = {
   content: {
@@ -20,7 +20,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const ModalSchedule = (props, {handleshow}) => {
+const ModalSchedule = (props, { handleshow }) => {
   const [facility, setFacility] = useState([]);
   const [applyData, setApplyData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(true);
@@ -84,7 +84,7 @@ const ModalSchedule = (props, {handleshow}) => {
       }
     }
 
-    console.log("Chkd Arry: ", chkdAry);
+    // console.log("Chkd Arry: ", chkdAry);
 
     return chkdAry;
   };
@@ -99,7 +99,7 @@ const ModalSchedule = (props, {handleshow}) => {
     // handleshow(data);
     // console.log("Check the function: ", handleshow);
     props.fetchData(data);
-    
+
     setModalIsOpen(false);
     props.history.push("/form");
     // window.location.href="/form"
@@ -136,70 +136,68 @@ const ModalSchedule = (props, {handleshow}) => {
   };
 
   return (
-    
-      <Modal
-        isOpen={modalIsOpen}
-        style={customStyles}
-        shouldCloseOnOverlayClick={false}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
-        <form>
-          <h5 style={{ color: "#537794" }}>Facility Times</h5>
-          <div style={{ display: "flex" }} className="mt-5">
-            <div style={{ width: "6%" }} className="ml-5 mr-2"></div>
-            <div className="ml-5 mr-4" style={{ width: "8%" }}>
-              From
-            </div>
-            <div className="ml-5 mr-4" style={{ width: "10.3%" }}></div>
-            <div className="ml-4" style={{ width: "8%" }}>
-              To
-            </div>
-            <div className="ml-1" style={{ width: "10.3%" }}></div>
-            <div className="ml-5"></div>
+    <Modal
+      isOpen={modalIsOpen}
+      style={customStyles}
+      shouldCloseOnOverlayClick={false}
+      onRequestClose={() => setModalIsOpen(false)}
+    >
+      <form>
+        <h5 style={{ color: "#537794" }}>Facility Times</h5>
+        <div style={{ display: "flex" }} className="mt-5">
+          <div style={{ width: "6%" }} className="ml-5 mr-2"></div>
+          <div className="ml-5 mr-4" style={{ width: "8%" }}>
+            From
           </div>
-          {weeks.map((week) => (
-            <WeekSchedule
-              week={week}
-              key={week}
-              setFacility={setFacility}
-              facility={facility}
-              applyToAll={applyToAll}
-              applyData={applyData}
-            />
-          ))}
+          <div className="ml-5 mr-4" style={{ width: "10.3%" }}></div>
+          <div className="ml-4" style={{ width: "8%" }}>
+            To
+          </div>
+          <div className="ml-1" style={{ width: "10.3%" }}></div>
+          <div className="ml-5"></div>
+        </div>
+        {weeks.map((week) => (
+          <WeekSchedule
+            week={week}
+            key={week}
+            setFacility={setFacility}
+            facility={facility}
+            applyToAll={applyToAll}
+            applyData={applyData}
+          />
+        ))}
 
-          <div className="mt-5 d-flex">
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "#FB6860",
-                color: "white",
-                textTransform: "none",
-              }}
-              className="ml-auto mr-3"
-              onClick={() => {
-                setModalIsOpen(false);
-                setFacility([]);
-                setApplyData([]);
-                
-              }}
-            >
-              Cancle
-            </Button>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "#2B5F8E",
-                color: "white",
-                textTransform: "none",
-              }}
-              className="mr-3 px-4"
-              type="submit"
-              onClick={handleSubmitModal}
-            >
-              Save
-            </Button>
-            {/* <Link
+        <div className="mt-5 d-flex">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#FB6860",
+              color: "white",
+              textTransform: "none",
+            }}
+            className="ml-auto mr-3"
+            onClick={() => {
+              setModalIsOpen(false);
+              setFacility([]);
+              setApplyData([]);
+            }}
+          >
+            Cancle
+          </Button>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#2B5F8E",
+              color: "white",
+              textTransform: "none",
+            }}
+            className="mr-3 px-4"
+            type="submit"
+            onClick={handleSubmitModal}
+          >
+            Save
+          </Button>
+          {/* <Link
               to="/form"
               style={{
                 backgroundColor: "#2B5F8E",
@@ -211,11 +209,10 @@ const ModalSchedule = (props, {handleshow}) => {
             >
               Save
             </Link> */}
-          </div>
-        </form>
-      </Modal>
-    
+        </div>
+      </form>
+    </Modal>
   );
 };
 
-export default connect(null, { fetchData })(ModalSchedule)
+export default connect(null, { fetchData })(ModalSchedule);

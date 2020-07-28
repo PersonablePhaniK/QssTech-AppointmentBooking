@@ -5,7 +5,14 @@ const ToggleTest = ({ setAmpm, usrInpt }) => {
 
   useEffect(() => {
     setVal(setAmpm);
-    
+
+    // setTimeout(
+    //   () => {
+    //     setHi('Hi There ');
+
+    //     console.log('Data: ', hi)},
+    //   3000
+    // );
   }, [setAmpm]);
 
   return (

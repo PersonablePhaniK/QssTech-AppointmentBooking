@@ -22,8 +22,8 @@ const customStyles = {
     height: "70%",
   },
   overlay: {
-    backgroundColor: '#B5B5B5'
-  }
+    backgroundColor: "#B5B5B5",
+  },
 };
 
 Modal.setAppElement("#root");
@@ -126,7 +126,7 @@ const InputForm = (props) => {
       }
     }
 
-    console.log("Chkd Arry: ", chkdAry);
+    // console.log("Chkd Arry: ", chkdAry);
 
     return chkdAry;
   };
@@ -134,7 +134,7 @@ const InputForm = (props) => {
   const handleSubmitModal = (e) => {
     e.preventDefault();
     let data = preProcess();
-    console.log("Data return: ", data);
+    // console.log("Data return: ", data);
     /**
      * Check the error here
      */
@@ -156,7 +156,7 @@ const InputForm = (props) => {
 
     let applyObj = chkdAry.find((i) => i.weekName == id);
 
-    console.log("Apply Obj: ", applyObj);
+    // console.log("Apply Obj: ", applyObj);
 
     let replaceAry = [applyObj];
 
@@ -239,7 +239,7 @@ const InputForm = (props) => {
       props.db.data.add(dataObj).then(async () => {
         let allObjs = await props.db.data.toArray();
 
-        console.log("DB data: ", allObjs);
+        // console.log("DB data: ", allObjs);
       });
 
       setInputForm({
@@ -256,7 +256,7 @@ const InputForm = (props) => {
         facilityTimings: "",
       });
 
-      console.log("Final Data: ", inputForm);
+      // console.log("Final Data: ", inputForm);
       // props.history.push("/data");
     }
   };
